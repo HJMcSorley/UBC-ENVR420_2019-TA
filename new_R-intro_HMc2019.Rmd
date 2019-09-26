@@ -1,0 +1,384 @@
+---
+title: "ENVR 420 Intro to R & RStudio"
+author: "from your TA, Hannah McSorley"
+date: "2019-09-10"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: cerulean 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+___Hello!___
+
+This is an overview document intended to provide students of ENVR 420 (Ecohydrology of Watersheds and Water Systems) with a broad introduction to the basics of R and RStudio. This is by no means a comprehensive lesson, but it includes background and context that might be helpful if you're new to data analysis in the R programming language.
+
+# Welcome to R and RStudio! 
+
+[R](https://www.r-project.org/) is a open source programming language and environment used for statistical and computational research and graphics. The [R Foundation](https://www.r-project.org/foundation/) is a not-for-profit organization which oversees the development of the R environment. R is available as free software. R has an excellent online community, a great deal of documentation and ever-growing body of functions and packages to expand your data analysis abilities.
+  
+The R programming language has a command line interface (like a computer control panel), so it's nice to run the program through a more accessible platform like RStudio, which offers a user-friendly interface with the R software.
+
+[RStudio](https://www.rstudio.com/) is an integrated development environment (IDE) for R (with no formal connection to the R Foundation). It is an excellent tool for creating organized, tidy and reproducible data analysis workflows. R Studio can be used to generate attractive output documents (HTML, PDF, and Microsoft Word documents, as well as presentation slides). 
+This HTML document was produced as an R Markdown file using RStudio (more on Markdown later). 
+
+Note that you must have the R software installed on your computer to run RStudio.
+If you haven't already, install the most recent versions of [R](https://www.r-project.org/) and [R Studio](https://www.rstudio.com/products/rstudio/download/) software.
+
+## Working in RStudio
+
+Launch RStudio.
+
+The RStudio interface includes panels for the console and editor (with syntax highlighting), as well as tools for plotting, viewing history, debugging, work-space management, and outputting files. 
+
+Until you open a new file, you may not see the editor panel. 
+
+## Open a new R Script 
+
+Go to File, select 'New File' or press Ctrl+shift+N / Command+shift+N (Windows / Mac).
+
+The default Script file layout is for the editor panel to open at the top left, with console directly below it (you may have to double click the "console" header to expand that panel). At the top right, you'll see a panel with three tabs (Environment/History/Connections), and bottom right shows a panel with 5 tabs (Files/Plots/Packages/Help/Viewer).
+
+
+#### The Editor Panel 
+
+The editor is a work space to write and keep track of your code, make notes and experiment with different methods of data analysis/computing. If you are interested in saving your work (_seems like a good idea_), the editor is a tidy space to workup your script and view your progress. Along with your code, you can leave yourself notes (# notes) in this work space.   
+
+#### The Console Panel
+
+The console is where code is executed. The console is a command line interface, and you can type (or copy & paste) code directly into the console and execute those commands immediately. This is super handy for looking things up and checking bits of code. 
+It can feel a bit cumbersome to scroll through executed code to locate what worked and what didn't, therefore it's good practice to keep your code in the editor work space for easy management. 
+
+#### Write Code in the Editor
+
+The editor is your acting script work space. You can type code here, try it out, update it and save changes. A line of code can be executed (run) directly from the editor with the "Run" icon (upper right of editor panel), or with Ctrl+Enter / Command+Enter (Windows / Mac). The executed code will be displayed in the Console. 
+If you want to add a note to yourself, start the line with a hash-tag (#). Anything that follows a # will not be evaluated as code. 
+
+```{r}
+# here is a script space
+# comments follow the hashtag symbol
+# to execute code:
+# place the cursor on a line of code and press Ctrl+Enter (or click the Run icon, top right of editor panel)
+
+2 + 2  # this code will be evaluated (this comment will not be evaluated)
+
+```
+
+__FUN STUFF: CODE STYLE__
+If you love tidy data (_who doesn't?!_), check out Hadley Wickham's [R Style Guide](https://style.tidyverse.org/). Hadley Wickham is the Chief Scientist at RStudio and the creator of the ['tidyverse'](https://www.tidyverse.org/). The Style Guide has some very good advice for writing code nicely. Note that this is only a guide and you are the author of your own code -- you get to decide how it looks. Reproducibility and consistency is your friend, so finding a clear and coherent style that you're comfortable with is ideal.
+
+## Basic Computation (Arithmetic and Logic)
+
+R performs basic and advanced computation. Try some simple math (e.g. two plus two). Run your line of code to execute and evaluate it. 
+
+_Style note: You can add spaces between values and operators for clarity, but you don't have to._
+
+```{r}
+# this is basic arithmetic
+4 - 2  # subtraction
+2 * 2  # multiplication
+
+# type some equations and run your code
+```
+
+R performs logical evaluations. Make a logical statement and see how R evaluates it (e.g. two is greater than four)
+```{r}
+2 > 4  # pretty sure that's not true... 
+```
+
+Here is a nice summary of arithmetic and logical operators from DataCamp: https://www.statmethods.net/management/operators.html
+
+## Objects and Functions
+
+R is an object oriented language, which means that information (data) is stored in objects. An object can be many things, it is a variable. Everything in R is either an _object_ or a _command/function_.
+
+### Functions
+
+A function is an operation that is performed on an object to yield a result.
+Probably the first function to learn is "?function", this looks up other functions and RStudio will display R Documentation about it in the help tab (bottom right panel).
+
+You can also search for Documentation by pressing F1 after clicking on/selecting a function in the editor. Or, use the search bar in the 'Help' tab (lower right corner window of RStudio)
+
+### Objects
+
+Objects store data, they can be manipulated, operated on, called on by name, and combined with other objects. To assign data to an object, use this symbol "<-" which can be read as "is assigned" or "gets".
+(i.e. "object gets data" or  "object <- data"). 
+
+```{r}
+# assign data to objects
+# object gets data = "object <- data"
+
+# store a number in a variable called "number"
+number <- 5+2
+
+# call on that object to see what it is
+number
+
+# do math on that object
+number-2
+
+# store that same number in a variable with another name
+seven <- 5+2
+
+# call this new object to see its value
+seven
+
+# do math with those variables
+seven*2
+number*2
+number*seven
+
+# what happens if you store a new number in the variable called "number"?
+number <- 3
+# check the above math again
+number*2
+
+# when you assign data to an object that already exists, any previous data will be overwritten 
+```
+
+Note that when you store value in a variable (i.e. assign data to an object), it shows up in the "History" tab (top right panel).
+
+Objects have attributes that influence how they can be used, these attributes describe the object's data type and structure.
+
+## Data Types (or modes)
+
+The format of a value and how it can be used is attributed to it's type.
+There are five essential data types, or modes of data in R:
+
+* character 
+  * non-numeric, text 
+  * _e.g._ "a", "swift", "pie"
+* numeric 
+  * real or decimal
+  * _e.g._ 2, 2.15, 7, 3.141592
+* integer
+  * whole number
+  * _e.g._ 2L, 7L 
+    * note: "L" commands R to store the value an integer, not numeric (not sure when you would need this, but there it is)
+* logical
+  * evaluates to binary result 
+  * _e.g._ TRUE, FALSE
+* complex
+  * complex numbers with real and imaginary parts
+  * _e.g._ 1+4i
+  
+_'raw'_ is another type of data in R... it is byte oriented in that a raw vector prints with each byte separately represented as a pair of hex digits... I don't know much about this and won't say anything more about it.
+  
+## Data Structures
+
+### Vectors
+
+A common and versatile object is the __vector__.
+A vectors is a 1-dimensional object that stores multiple pieces of data. Technically, a list is a _heterogeneous_ vector (can contain data of different types, e.g. numeric and character). Most vectors encountered in R are _homogeneous_ (atomic) vectors that contain data of only one type (i.e. all data are character values, or all are numeric values).
+To create a vector, assign a group of data to an object by concatenating the values:
+  vector_object <- c(value, value, value)
+
+```{r vectors}
+# make a vector of nap times (in minutes)
+
+times <- c(60, 40, 33, 15, 20, 55, 35)
+
+# note that you have to call this object to see what it is:
+times
+
+# super neat R trick...
+# if you put a line in parentheses 
+# (highlight the entire line and add a bracket, it puts the whole line in parentheses)
+# the output will automatically show when you run your code, you won't have to call it.
+(times <- c(60, 40, 33, 15, 20, 55, 35)) 
+
+# what is the data type (class) of this object?
+class(times)
+
+# what is the structure of this object?
+str(times)
+```
+
+
+Just as you can perform math with single-value objects, you can perform arithmetic and logical operators using vectors.
+
+```{r Vector-math}
+# using the vector object 'times' from above:
+
+mean(times)  # arithmetic mean of all values in the vector, output is a single value (average time)
+sqrt(times)  # square root evaluation on each value, output is a vector the same length as the originial vector
+sd(times)  # standard deviation, output is a single value
+range(times)  # smallest and largest (min and max) values in the vector
+
+# logical operators
+times < 30  # less than
+times == 20  # is equal to
+times != 20  # is not equal to
+times > 20 & times <50  # range: greater than one number and less than another
+# this returns a vector of TRUE and FALSE
+
+# check a specific value
+any(times < 30)  # checks to see if there are any values which satisfy this logic
+
+# if you want to know which position the values are that satisfy the TRUE result...
+which(times < 30)
+```
+
+#### Subsetting Vectors
+
+You can select a portion of data contained in a vector based on it's position. In the above code, the function 'which()' identified the location (index) where the logical argument ("times < 30") was TRUE. 
+```{r}
+# remember the vector of nap times?
+times
+
+# subset the value in the fourth position
+# vector-object[position]
+times[4]
+# can we nest functions to call the number after identifying it's position?
+times[which(times < 30)]  # yes, yes we can
+# even more tidy, same output:
+times[times <30]
+
+times
+times[times > 50] <- 50  # woah, look out
+# this command re-assigned a value of 50 to any data from the original 'times' vector that were greater than 50
+# kind of weird
+
+mean(times)
+# note that this value is now lower than the first time this was calculated because of the above function that over-wrote values greater than 50. 
+
+mean(times, na.rm = TRUE) # you don't have to define the first argument unless you're putting it out of order
+```
+
+### Dataframes
+
+Dataframes are 2-dimensional (rows and columns) heterogeneous (multiple data types) collections of data. 
+
+```{r dataframes}
+# There are some built-in datasets in RStudio
+# one is called "mtcars" which has historical (1973-1974) data on automobiles from the US magazine 'Motor Trends'
+
+str(mtcars)   # what is the structure of this data?
+names(mtcars)  # extracts a vector of the names (column headers) from the data frame (in order)
+head(mtcars)  # show the top six rows of the dataframe
+tail(mtcars)  # show the last six rows of the dataframe
+
+
+# you can subset columns by name with the dollar sign $
+# dataframe$variable
+mtcars$mpg
+mean(mtcars$mpg)  # average of miles per gallon for all the cars ('73-'74 models) in this dataset 
+
+# you can subset a dataframe by row and column number
+# dataframe[row,column]
+mtcars[3, 5]  # select the first three rows from the fifth column
+mtcars[1:12, ]  # select rows 1 to 12 in all columns
+```
+Note that executing functions yields results, but if you want to carry those results forward for further analysis or to be called on later, an object must be created to store the output.
+
+```{r}
+# subset this data set for miles per gallon (mpg) and horsepower (hp)
+# save data from columns 1 and 4 to object 'df'
+df <- mtcars[ , c(1,4)]  # all rows, columns one and four
+
+# what's the structure of this new object (the subset dataframe)
+str(df)
+
+# note that you can achieve the same result using 'subset()'
+df2 <- subset(mtcars, select = c(mpg, hp))
+
+# what's the structure of this new object (the subset dataframe)
+str(df2)
+
+```
+
+## R Markdown in R Studio
+
+R Markdown is a file format (file extension is ".RMD") used for making documents with the R language (this HTML document was made using R Markdown). Markdown is a way of writing and formatting a document by using in-line commands on plain text (it's a markup language with plain text formatting syntax). Check out [this cheat sheet](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf) or [this cheat sheet](https://www.markdownguide.org/cheat-sheet/) for markdown formatting. For example, __Header-1__ is formatted by starting a line of plain text with _one hash mark_, __Header-2__ text is preceded by _two hashmarks_. 
+Markdown is easy to read because it's plain text, and it's easy to update the formatting too.
+
+An R Markdown document is written in markdown and contains chunks of embedded R code. R Markdown is a simple formatting syntax for authoring HTML, PDF, MS Word, or slideshow documents. It's also the format that most ENVR 420 Problem Sets and Assignments will be provided in, and a tidy way for you to submit your work.
+
+### Open a new R Markdown file
+
+In RStudio, open a new RMarkdown file (File > New File > R Markdown). You can follow the pop-up box prompts to fill in the empty cells (e.g. Title, Default Output Format), or just click 'OK' (you can fill those things in later, or change them in the R Markdown file). 
+In the new RMD file, you will see that RStudio provides you with a written overview and orientation to the RMarkdown layout (so helpful). 
+
+Notice that the overview RDM file that RStudio provides includes both text (plain text language) and chunks of code. A code "chunk" is a script block, where R code is included between two lines with three back-ticks (```). The text that exists outside of a code chunk is interpreted as text, what is written inside of the chunk is interpreted as code. You can add plain text notes as annotation in your code chunk by preceding the text with a hash mark (#). Anything in a code chunk that follows a __#__ is read by R as a note, and is not executed as code. This is very helpful for annotating your code to orient your (future) self or anyone else who may look at your code.
+
+You can add a new chunk by clicking "Insert" (top of the markdown work space) and selecting _R_, or using a keyboard shortcut (e.g CTRL+Alt+I on Windows, or Command+Alt+I on MacOS). 
+
+## Packages, Functions and the Library
+
+The final thing I'll touch on here is the power of packages. 
+Recall that anything in R is either an object or a function/command. An R function is like a processor that takes an object, alters it in a specific way, and returns a modified version of that object. R has many built in functions, primarily focused on statistics (e.g. arithmetic and logic inputs/outputs). The built-in function of R exist in a Package called 'base'. Base R, like all packages, contains R code, documentation for each function contained in the package, some tests and data sets. To find out more about base R, type _?base_ or _library(help = "base")_ into the console and read about the package and it's functions in the help tab (lower right window panel). 
+
+> A package is like a toolbox, and functions are like tools. A package contains useful tools for you to work on your data. 
+
+\*\ __Packages and functions are case sensitive__\*\ 
+
+_As with all object names in R, the names of R packages and functions are case sensitive. When troubleshooting R code, check that upper and lower case letters are as they should be._
+
+You can install new packages that contain specialized functions to help you with your programming needs. There are a few ways to install a package in RStudio. 
+Here are three methods of installing packages from CRAN:
+
+1. use the utilities function _install.packages()_ 
+
+  * to install a package called "Package", type 'install.packages("Package")' in the console
+  
+2. navigate to Tools, and click 'Install Packages'
+
+3. In the 'Packages' Tab in RStudio (lower right window panel), click "Install" and follow the prompts.
+
+
+_Wait, what's CRAN?_
+
+The official R package repository (remote location where packages are stored) is [CRAN](https://cran.r-project.org/web/packages/policies.html), which is a network of ftp and web servers maintained by the R community around the world. The R foundation coordinates CRAN, and for a package to be published there, it needs to meet guidelines that ensure the package meets CRAN policies. 
+There are other package repositories, such as [GitHub](https://github.com/) and [Bioconductor](https://www.bioconductor.org/), which require modified installation steps (not covered here).
+
+If you like, check out [this RStudio compilation](https://support.rstudio.com/hc/en-us/articles/201057987-Quick-list-of-useful-R-packages?mobile_site=true) of useful R packages, including notes on their applications. 
+
+#### The Tidyverse
+
+A key collection of packages that we will use in ENVR 420 is the 'tidyverse'. The [Tidyverse](https://www.tidyverse.org/) is well supported and aimed at improving the legibility, accessibility and reproducibility of data science; I am a huge fan (_who doesn't want to work in a tidyverse?_). Through ENVR 420 Problem Sets, you will encounter functions from many of the tidyverse packages. Tidyverse is well developed (and ever growing) and available on CRAN; use install.packages("tidyverse") to get started.
+
+Key packages we'll use in the tidyverse:
+
+* dplyr
+* lubridate
+* ggplot2
+
+
+helpful functions to look up:
+
+* filter()
+* select()
+* mutate()
+* group_by()
+* summarise()
+* %>% (the piping operator) \*\
+* arrange()
+* starts_with()
+
+\*\ The piping operator is a beautiful thing that allows you to pass an object through a series of functions which operate sequentially to provide one output.  
+
+_We will cover more about the tidyverse in ENVR 420 Problem Sets._
+
+### Library
+
+When you install a package, you are downloading the package files to your computer. Packages are stored in a directory on your computer called _'library'_ (the directory path will show during the installation process, or you can check what it is with the call _'.Library'_). To access and use a package, you need to load it into your R session; this is accomplished by using the base R function 'library()' (e.g. library(package)).
+
+> If a function is a tool, and a package is a toolbox, the library is the tool shed.
+
+or, as Hadley Wickham said:
+
+>...a package is a like a book, a library is like a library; you use library() to check a package out of the library... _~[Dec. 8, 2014](https://twitter.com/hadleywickham/status/541948905009586176)_
+
+
+#### Package Functions 
+
+You can explicitly call a function from a specific package by using two colons '::' (e.g. package::function). This is helpful if there is a function name that exists in more than one package. For example 'rownames' is a function in the _base R_ package as well as the package _tibble_. Explicitly stating which package your function is in can be helpful for future you or anyone else who might be looking at your code. 
+
+
+## Give R a try!
+
+I recommend using RStudio. Give it a try, remember the look up functions ('?function' and F1). If you are stuck, look it up online, there's a very good chance that someone has asked a similar question and you'll find an answer (e.g. on Stack Exchange). IF you're super stuck, come to [office hours or send an email](https://canvas.ubc.ca/courses/41131/assignments/syllabus).
